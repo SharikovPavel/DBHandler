@@ -9,5 +9,9 @@ public class Starter {
         Init.initPropsConfig();
         DataBaseHelper.createNewDataBase();
         DataBaseHelper.openDataBase(Handler.props.getProperty("pathToBase"));
+
+        DataBaseHelper.createTableInDataBase();
+        DataBaseHelper.addRowInTable("Сенатор", 4, 406, "DBHandlerCompany");
+        DataBaseHelper.getRowInOpenTable();
     }
 }

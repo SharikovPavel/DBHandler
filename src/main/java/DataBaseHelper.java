@@ -1,6 +1,4 @@
-import com.healthmarketscience.jackcess.Database;
-import com.healthmarketscience.jackcess.DatabaseBuilder;
-import com.healthmarketscience.jackcess.Table;
+import com.healthmarketscience.jackcess.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,9 +27,9 @@ public class DataBaseHelper {
      */
     public static void openDataBase() {
         try {
-            Handler.openDB = DatabaseBuilder.open(new File(
+            Handler.DBDefault = DatabaseBuilder.open(new File(
                     Handler.HOME_DIR + Handler.props.getProperty("pathToBase")));
-            System.out.println("База данных " + Handler.openDB.getFileFormat() + " открыта");
+            System.out.println("База данных " + Handler.DBDefault.getFileFormat() + " открыта");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -45,11 +43,61 @@ public class DataBaseHelper {
      */
     public static void openDataBase(String pathToDataBase) {
         try {
-            Handler.openDB = DatabaseBuilder.open(new File(
+            Handler.DBDefault = DatabaseBuilder.open(new File(
                     Handler.HOME_DIR + pathToDataBase));
-            System.out.println("База данных " + Handler.openDB.getFileFormat() + " открыта");
+            System.out.println("База данных " + Handler.DBDefault.getFileFormat() + " открыта");
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * Получение определенной таблицы из новой открытой базы данных
+     *
+     * @param nameTable имя таблицы
+     */
+    public static void getTableOfNewOpenDB(String nameTable) throws IOException {
+        Handler.tableDefault = Handler.DBDefault.getTable(nameTable);
+    }
+
+    /**
+     * Создание в default базе данных таблицы и столбцов согласно шаблону
+     */
+    public static void createTableInDataBase() {
+        try {
+            Handler.tableDefault = new TableBuilder("Offices and premises")
+                    .addColumn(new ColumnBuilder("Building", DataType.TEXT))
+                    .addColumn(new ColumnBuilder("Floor", DataType.INT))
+                    .addColumn(new ColumnBuilder("Room", DataType.INT))
+                    .addColumn(new ColumnBuilder("Company name", DataType.TEXT))
+                    .toTable(Handler.DBDefault);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Метод позволяет добавить строку в таблицу
+     *
+     * @param contentRow Наполнение ряда
+     */
+    public static void addRowInTable(Object... contentRow) throws IOException {
+        try {
+            Handler.tableDefault.addRow(contentRow);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new IOException(e.getCause().getMessage());
+        }
+    }
+
+    /**
+     * Метод позволяет вывести все строки таблицы
+     *
+     * @throws IOException
+     */
+    public static void getRowInOpenTable() throws IOException {
+        for (Row row : Handler.tableDefault) {
+            System.out.println(row);
         }
     }
 }
