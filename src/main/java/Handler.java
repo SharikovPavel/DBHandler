@@ -16,6 +16,11 @@ public class Handler {
     public static Database DBDefault;
 
     /**
+     * Переменная для создания таблицы из списка
+     */
+    public static TableBuilder tableBuilder;
+
+    /**
      * Переменная для хранения отркытой таблицы из вновь открытой Базы данных
      */
     public static Table tableDefault;

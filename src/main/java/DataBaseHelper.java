@@ -2,6 +2,8 @@ import com.healthmarketscience.jackcess.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Sharikov Pavel on 05.10.2017.
@@ -65,11 +67,11 @@ public class DataBaseHelper {
      */
     public static void createTableInDataBase() {
         try {
-            Handler.tableDefault = new TableBuilder("Offices and premises")
+            Handler.tableDefault = new TableBuilder("Offices_and_premises")
                     .addColumn(new ColumnBuilder("Building", DataType.TEXT))
                     .addColumn(new ColumnBuilder("Floor", DataType.INT))
                     .addColumn(new ColumnBuilder("Room", DataType.INT))
-                    .addColumn(new ColumnBuilder("Company name", DataType.TEXT))
+                    .addColumn(new ColumnBuilder("Company_name", DataType.TEXT))
                     .toTable(Handler.DBDefault);
         } catch (IOException e) {
             e.printStackTrace();
@@ -91,13 +93,24 @@ public class DataBaseHelper {
     }
 
     /**
-     * Метод позволяет вывести все строки таблицы
+     * Метод позволяет вывести все строки таблицы в консоль
      *
      * @throws IOException
      */
     public static void getRowInOpenTable() throws IOException {
         for (Row row : Handler.tableDefault) {
             System.out.println(row);
+        }
+    }
+
+    /**
+     * Метод позволяющий получить любой столбец таблице целиком
+     *
+     * @param nameColumn
+     */
+    public static void getColumnInOpenTable(String nameColumn) {
+        for (Row row : Handler.tableDefault) {
+            System.out.println(row.getString(nameColumn));
         }
     }
 }
