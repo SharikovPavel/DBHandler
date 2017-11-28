@@ -31,4 +31,8 @@ public class Init {
             throw new Exception("Ошибка. Не удалось прочитать файл конфигураций");
         }
     }
+
+    public static void initDirs() {
+        //TODO: Если нет папки base - то создавать ее
+    }
 }
