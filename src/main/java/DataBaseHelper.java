@@ -68,6 +68,7 @@ public class DataBaseHelper {
     public static void createTableInDataBase() {
         try {
             Handler.tableDefault = new TableBuilder("Offices_and_premises")
+                    .addColumn(new ColumnBuilder("Street", DataType.TEXT))
                     .addColumn(new ColumnBuilder("Building", DataType.TEXT))
                     .addColumn(new ColumnBuilder("Floor", DataType.INT))
                     .addColumn(new ColumnBuilder("Room", DataType.INT))
@@ -84,6 +85,7 @@ public class DataBaseHelper {
      * @param contentRow Наполнение ряда
      */
     public static void addRowInTable(Object... contentRow) throws IOException {
+        //TODO: Сделать возможность принятия листа
         try {
             Handler.tableDefault.addRow(contentRow);
         } catch (IOException e) {

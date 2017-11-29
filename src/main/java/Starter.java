@@ -16,8 +16,8 @@ public class Starter {
 
         DataBaseHelper.createTableInDataBase();
 
-        DataBaseHelper.addRowInTable("Сенатор", 4, 406, "DBHandlerCompany");
-        DataBaseHelper.addRowInTable("Сенатор", 2, 212, "DBHandlerCompany");
+        DataBaseHelper.addRowInTable("Bolshevikov", "Сенатор", 4, 406, "DBHandlerCompany");
+        DataBaseHelper.addRowInTable("Bolshevikov", "Сенатор", 2, 212, "DBHandlerCompany");
 
         DataBaseHelper.getRowInOpenTable();
 
