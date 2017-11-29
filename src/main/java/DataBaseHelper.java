@@ -2,8 +2,6 @@ import com.healthmarketscience.jackcess.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Sharikov Pavel on 05.10.2017.
@@ -114,5 +112,30 @@ public class DataBaseHelper {
         for (Row row : Handler.tableDefault) {
             System.out.println(row.getString(nameColumn));
         }
+    }
+
+    /**
+     * Метод производит поиск по одному значению, всей строки
+     *
+     * @param value
+     */
+    //TODO: Кароч поиск сущности по таблице, вывод всей строки или конкретного значения в строке
+    public static <T> void tableSearchByValue(T value) throws IOException {
+
+        for (Column column : Handler.tableDefault.getColumns()) {
+            column.getName();
+            for (Row row : Handler.tableDefault) {
+                if (row.values().contains(value)) {
+                    System.out.println("ЕСТЬ");
+                }
+
+                row.values().stream().forEach(e -> {
+                    if (e.equals("Сенатор")) {
+                        System.out.println("5");
+                    }
+                });
+            }
+        }
+        System.out.println("Нет данных по текущему поиску");
     }
 }

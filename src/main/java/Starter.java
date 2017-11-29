@@ -23,5 +23,7 @@ public class Starter {
 
         DataBaseHelper.getColumnInOpenTable("Building");
         DataBaseHelper.getColumnInOpenTable("Company_name");
+
+        DataBaseHelper.tableSearchByValue(212);
     }
 }
